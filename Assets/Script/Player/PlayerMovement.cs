@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 input;
     private List<GameObject> scraps = new List<GameObject>();
     private Rigidbody rb;
-    private bool grounded;
+    private bool grounded, hasPickaxe = true;
     private float height;
     private Vector3 cameraOffset;
 
@@ -26,11 +26,31 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, height);
+        if (hasPickaxe)
+        {
+            transform.GetChild(1).GetChild(2).gameObject.SetActive(true);
+            if (Input.GetMouseButton(0))
+            {
+                float rotationValue = Mathf.PingPong(Time.time * 8f, 1.0f) * 120 - 35;
+                Vector3 newRotation = new Vector3(rotationValue, 180, 0);
+                transform.GetChild(1).GetChild(2).localEulerAngles = newRotation;
+            }
+            else
+            {
+                transform.GetChild(1).GetChild(2).localEulerAngles = new Vector3(0, 180, 0);
+            }
+        }
+        else
+        {
+            transform.GetChild(1).GetChild(2).gameObject.SetActive(false);
+        }
+
+
+
 
         if (input.magnitude < 0.1f) return;
         Quaternion targetRotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
         transform.GetChild(1).transform.rotation = Quaternion.Lerp(transform.GetChild(1).transform.rotation, targetRotation, Time.deltaTime * 10f);
-
     }
 
     private void FixedUpdate()
