@@ -21,7 +21,7 @@ public class MouseLook : MonoBehaviour
         input.y += Input.GetAxisRaw("Mouse X") * Time.deltaTime * mouseSensitivity * 100;
         input.x += -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * mouseSensitivity * 100;
 
-        input.x = Mathf.Clamp(input.x, -offset, offset);
+        input.x = Mathf.Clamp(input.x, 0, offset);
 
         transform.rotation = Quaternion.Euler(input);
     }
