@@ -74,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.drag = 4;
             }
-
         }
         else
         {
@@ -93,9 +92,12 @@ public class PlayerMovement : MonoBehaviour
         {
             scraps[i].transform.position = Vector3.Slerp(scraps[i].transform.localPosition, transform.GetChild(1).GetChild(0).transform.position + Vector3.up * i / 2, (100 / (i + 1)) * Time.deltaTime);
         }
-        Camera.main.gameObject.transform.localPosition = Vector3.Slerp(Camera.main.gameObject.transform.localPosition, cameraOffset, 10 * Time.deltaTime);
-    }
 
+        if(cameraOffset.magnitude > 0)
+        {
+            Camera.main.gameObject.transform.localPosition = Vector3.Slerp(Camera.main.gameObject.transform.localPosition, cameraOffset, 10 * Time.deltaTime);
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<ScrapScript>() != null)
