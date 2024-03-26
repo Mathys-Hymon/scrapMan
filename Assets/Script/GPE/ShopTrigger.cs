@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class ShopTrigger : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] private GameObject pressE;
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ShopManager.instance.EnterShop();
+            pressE.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ShopManager.instance.EnterShop();
+                pressE.SetActive(false);
+            }
         }
     }
 }
