@@ -72,12 +72,14 @@ public class ShopManager : MonoBehaviour
     public void HideShop()
     {
         shop.SetActive(false);
+        PlayerMovement.instance.ShowHideCamera(false);
         StopAllCoroutines();
         StartCoroutine(TypeText("Que puis-je faire d'autre pour toi?"));
     }
 
     private void ShowShop()
     {
+        PlayerMovement.instance.ShowHideCamera(true);
         shop.SetActive(true);
     }
 

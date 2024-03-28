@@ -180,6 +180,12 @@ public class PlayerMovement : MonoBehaviour
     {
         isInShop=active;
     }
+
+    public void ShowHideCamera(bool active)
+    {
+        transform.GetChild(3).gameObject.SetActive(active);
+    }
+
     public bool getIsInShop() { return isInShop; }
 
 }
