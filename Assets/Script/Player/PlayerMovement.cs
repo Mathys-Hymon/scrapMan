@@ -56,6 +56,10 @@ public class PlayerMovement : MonoBehaviour
             pressE.SetActive(false);
         }
 
+        if (transform.GetChild(2).gameObject.activeSelf)
+        {
+            transform.GetChild(1).transform.rotation *= Quaternion.Euler(0, Time.deltaTime * 50, 0);
+        }
 
         if (input.magnitude < 0.1f) return;
 
@@ -64,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
             transform.GetChild(1).transform.rotation = Quaternion.Lerp(transform.GetChild(1).transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
+        
     }
 
     private void FixedUpdate()
@@ -143,16 +148,48 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<ScrapScript>() != null)
+        if (collision.gameObject.GetComponent<ScrapScript>() != null && scraps.Count <= 15)
         {
             if(!scraps.Contains(collision.gameObject.GetComponent<ScrapScript>().gameObject))
             {
                 scraps.Add(collision.gameObject.GetComponent<ScrapScript>().gameObject);
                 collision.gameObject.GetComponent<ScrapScript>().gameObject.GetComponent<Collider>().enabled = false;
                 collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                collision.gameObject.transform.GetChild(0).gameObject.layer = gameObject.layer;
+                collision.gameObject.transform.GetChild(0).GetChild(0).gameObject.layer = gameObject.layer;
                 Destroy(collision.gameObject.transform.GetChild(1).gameObject);
                 cameraOffset = new Vector3(0,0,Camera.main.gameObject.transform.localPosition.z - Vector3.Distance(scraps[scraps.Count-1].transform.position, transform.GetChild(1).GetChild(0).transform.position)/2);
             }
+        }
+    }
+
+    public void SetColorMoney(int cost)
+    {
+        if(cost >= scraps.Count)
+        {
+            for (int i = 0; i < scraps.Count; i++)
+            {
+                scraps[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.red;
+                scraps[i].transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < cost; i++)
+            {
+                scraps[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.green;
+                scraps[i].transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material.color = Color.green;
+            }
+        }
+
+    }
+
+    public void ResetColorMoney()
+    {
+        foreach(GameObject scrap in scraps)
+        {
+            scrap.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.yellow;
+            scrap.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
     }
 
