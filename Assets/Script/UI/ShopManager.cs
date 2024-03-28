@@ -16,6 +16,9 @@ public class ShopManager : MonoBehaviour
 
     bool hasFinishedTalking, isTalking, canTalk;
 
+    [SerializeField] Button[] buyBtn;
+    [SerializeField] int[] itemCost;
+
     int index = 0;
     float timer;
 
@@ -132,13 +135,14 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void BuyItem(int cost, Button btn, int index)
+    public void BuyItem(int index)
     {
-        if(PlayerMovement.instance.GetMoney() > cost)
+        if(PlayerMovement.instance.GetMoney() > itemCost[index])
         {
+            var btn = buyBtn[index];
             btn.enabled = false;
-            var button = btn.colors;
-            button.disabledColor = Color.red;
+            var buttoncolor = btn.colors;
+            buttoncolor.disabledColor = Color.red;
             PlayerMovement.instance.ShowItem(index);
         }
         
