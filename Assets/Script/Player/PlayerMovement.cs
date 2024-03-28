@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 input;
     private List<GameObject> scraps = new List<GameObject>();
     private Rigidbody rb;
-    private bool grounded, hasPickaxe = true;
+    private bool grounded, hasPickaxe = true, isMining;
     private float height;
     private Vector3 cameraOffset;
 
@@ -31,12 +31,14 @@ public class PlayerMovement : MonoBehaviour
             transform.GetChild(1).GetChild(2).gameObject.SetActive(true);
             if (Input.GetMouseButton(0))
             {
+                isMining = true;
                 float rotationValue = Mathf.PingPong(Time.time * 8f, 1.0f) * 120 - 35;
                 Vector3 newRotation = new Vector3(rotationValue, 180, 0);
                 transform.GetChild(1).GetChild(2).localEulerAngles = newRotation;
             }
             else
             {
+                isMining = false;
                 transform.GetChild(1).GetChild(2).localEulerAngles = new Vector3(0, 180, 0);
             }
         }
@@ -49,8 +51,12 @@ public class PlayerMovement : MonoBehaviour
 
 
         if (input.magnitude < 0.1f) return;
-        Quaternion targetRotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
-        transform.GetChild(1).transform.rotation = Quaternion.Lerp(transform.GetChild(1).transform.rotation, targetRotation, Time.deltaTime * 10f);
+
+        if(rb.velocity.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
+            transform.GetChild(1).transform.rotation = Quaternion.Lerp(transform.GetChild(1).transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
     }
 
     private void FixedUpdate()
@@ -131,5 +137,10 @@ public class PlayerMovement : MonoBehaviour
                 cameraOffset = new Vector3(0,0,Camera.main.gameObject.transform.localPosition.z - Vector3.Distance(scraps[scraps.Count-1].transform.position, transform.GetChild(1).GetChild(0).transform.position)/2);
             }
         }
+    }
+
+    public bool isPlayerMining()
+    {
+        return isMining;
     }
 }
