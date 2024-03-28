@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 input;
     private List<GameObject> scraps = new List<GameObject>();
     private Rigidbody rb;
-    private bool grounded, hasPickaxe = true, isMining, isInShop;
+    private bool grounded, hasPickaxe, isMining, isInShop;
     private float height;
     private Vector3 cameraOffset;
 
