@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6242298025831562265}
   - component: {fileID: 6980880063171292751}
   - component: {fileID: 328995308090665033}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4972874814112478726}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basicCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 3135144639777481504}
   - component: {fileID: 8474862118798447966}
   - component: {fileID: 1918521747811445339}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,6 +159,7 @@ Transform:
   m_Children:
   - {fileID: 2817590239179738959}
   - {fileID: 7623817901329511768}
+  - {fileID: 6383066933143908235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3135144639777481504
@@ -234,7 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3284921790485363141}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ArmL1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +269,7 @@ GameObject:
   - component: {fileID: 7468227122328983322}
   - component: {fileID: 8924711701713237538}
   - component: {fileID: 3117696769939814724}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5094,7 +5095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7165958171474197907}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LegR3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5125,7 +5126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7623817901329511768}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5160,7 +5161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 992953711588593689}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Neck1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5191,7 +5192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4109538917577988298}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ArmR3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5222,7 +5223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6764237092734838945}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5256,7 +5257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3644917006344871685}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rig1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5290,7 +5291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7571012472950033425}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ArmR1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5322,7 +5323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1923710563699126188}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LegL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5354,7 +5355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 453976214737475529}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5386,7 +5387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 310177457789729131}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LegL3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5408,6 +5409,98 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1923710563699126188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5834314130897324752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6383066933143908235}
+  - component: {fileID: 7647555574872162072}
+  - component: {fileID: 1231839886850085766}
+  m_Layer: 3
+  m_Name: ShopCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6383066933143908235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5834314130897324752}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.74, z: -12.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4867444478393849278}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &7647555574872162072
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5834314130897324752}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 8
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &1231839886850085766
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5834314130897324752}
+  m_Enabled: 1
 --- !u!1 &5885963847322999274
 GameObject:
   m_ObjectHideFlags: 0
@@ -5417,7 +5510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4120829731386251416}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LegR2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5449,7 +5542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3953581105366122447}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ArmL3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5481,7 +5574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4806265737773862511}
   - component: {fileID: 5608651599318505236}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5566,7 +5659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2729323737839246348}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LegR1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5599,7 +5692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2817590239179738959}
   - component: {fileID: 5506576629704529781}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CameraArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5645,7 +5738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4837172615773012141}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ArmL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5677,7 +5770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 34558455772509144}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ScrapPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5708,7 +5801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1952089533382417414}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LegL1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5740,7 +5833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4906936991550877732}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ArmR2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5776,8 +5869,16 @@ PrefabInstance:
       value: Pickaxe
       objectReference: {fileID: 0}
     - target: {fileID: 2207449685672464438, guid: 39cf5521fbdb888458cd965f8c05050e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207449685672464438, guid: 39cf5521fbdb888458cd965f8c05050e, type: 3}
       propertyPath: m_TagString
       value: Pickaxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077707741864125102, guid: 39cf5521fbdb888458cd965f8c05050e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8046951699642470764, guid: 39cf5521fbdb888458cd965f8c05050e, type: 3}
       propertyPath: m_LocalScale.x

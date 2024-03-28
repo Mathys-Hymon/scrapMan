@@ -108,6 +108,12 @@ public class PlayerMovement : MonoBehaviour
             if (grounded)
             {
                 rb.drag = 4;
+                rb.mass = 1;
+            }
+            else
+            {
+                rb.drag = 0;
+                rb.mass = 50;
             }
         }
         else
@@ -115,10 +121,12 @@ public class PlayerMovement : MonoBehaviour
             if (grounded)
             {
                 rb.drag = 0.4f;
+                rb.mass = 1;
             }
             else
             {
-                rb.drag = 0.2f;
+                rb.drag = 0f;
+                rb.mass = 50;
             }
         }
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, playerSpeed);
