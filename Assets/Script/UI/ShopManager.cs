@@ -139,6 +139,7 @@ public class ShopManager : MonoBehaviour
             btn.enabled = false;
             var button = btn.colors;
             button.disabledColor = Color.red;
+            PlayerMovement.instance.ShowItem(index);
         }
         
     }
