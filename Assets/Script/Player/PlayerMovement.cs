@@ -141,6 +141,8 @@ public class PlayerMovement : MonoBehaviour
                 scraps.Add(collision.gameObject.GetComponent<ScrapScript>().gameObject);
                 collision.gameObject.GetComponent<ScrapScript>().gameObject.GetComponent<Collider>().enabled = false;
                 collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                collision.gameObject.transform.GetChild(0).gameObject.layer = gameObject.layer;
+                collision.gameObject.transform.GetChild(0).GetChild(0).gameObject.layer = gameObject.layer;
                 Destroy(collision.gameObject.transform.GetChild(1).gameObject);
                 cameraOffset = new Vector3(0,0,Camera.main.gameObject.transform.localPosition.z - Vector3.Distance(scraps[scraps.Count-1].transform.position, transform.GetChild(1).GetChild(0).transform.position)/2);
             }
