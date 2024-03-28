@@ -147,7 +147,7 @@ public class ShopManager : MonoBehaviour
         if(PlayerMovement.instance.GetMoney() > itemCost[index])
         {
             var btn = buyBtn[index];
-            btn.enabled = false;
+            btn.interactable = false;
             var buttoncolor = btn.colors;
             buttoncolor.disabledColor = Color.red;
             PlayerMovement.instance.ShowItem(index, itemCost[index]);
@@ -159,7 +159,8 @@ public class ShopManager : MonoBehaviour
         float Distance = Vector3.Distance(distanceGO.transform.position, PlayerMovement.instance.transform.position);
 
         distanceGO.transform.LookAt(PlayerMovement.instance.transform.position);
-        distanceGO.transform.localScale = new Vector3(0.05f * Distance/20, 0.05f * Distance / 20, 0.05f * Distance / 20);
+        distanceGO.transform.localScale = new Vector3(0.05f * Distance/15, 0.05f * Distance / 15, 0.05f * Distance / 15);
+        distanceGO.transform.localScale = new Vector3(Mathf.Clamp(distanceGO.transform.localScale.x, 0.05f, 10f), Mathf.Clamp(distanceGO.transform.localScale.y, 0.05f, 10f), Mathf.Clamp(distanceGO.transform.localScale.z, 0.05f, 10f));
         distanceGO.transform.GetChild(1).GetComponent<TextMeshProUGUI>().SetText(((int)Distance).ToString() + "m");
     }
 }

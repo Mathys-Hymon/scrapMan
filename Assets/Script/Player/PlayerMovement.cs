@@ -245,8 +245,8 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < cost; i++)
         {
-            Destroy(scraps[i].gameObject);
-            scraps.RemoveAt(i);
+            Destroy(scraps[0].gameObject);
+            scraps.RemoveAt(0);
         }
     }
 
