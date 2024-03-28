@@ -64,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
             transform.GetChild(1).transform.rotation = Quaternion.Lerp(transform.GetChild(1).transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
+        else if(transform.GetChild(2).gameObject.activeSelf)
+        {
+            transform.GetChild(1).transform.rotation = Quaternion.Euler(0,Time.timeSinceLevelLoad, 0);
+        }
     }
 
     private void FixedUpdate()
