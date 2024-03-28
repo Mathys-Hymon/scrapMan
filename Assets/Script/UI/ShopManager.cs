@@ -64,6 +64,7 @@ public class ShopManager : MonoBehaviour
     {
         canTalk = false;
         StopAllCoroutines();
+        CancelInvoke();
         StartCoroutine(TypeText("Très bien, voici ce que j'ai à te proposer."));
         Invoke(nameof(ShowShop), 3f);
     }
@@ -82,6 +83,7 @@ public class ShopManager : MonoBehaviour
 
     public void Talk()
     {
+        CancelInvoke();
         hasFinishedTalking = true;
         isTalking = true;
         canTalk = true;
@@ -94,6 +96,8 @@ public class ShopManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         canTalk = false;
+        PlayerMovement.instance.SetIsInShop(false);
+        CancelInvoke();
         StopAllCoroutines();
         StartCoroutine(TypeText("Goodbye my friend"));
         Invoke(nameof(HideShopDialogue), 2f);
