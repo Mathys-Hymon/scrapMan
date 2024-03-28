@@ -14,6 +14,7 @@ public class ShopManager : MonoBehaviour
     private GameObject shop;
 
     [SerializeField] private TextMeshProUGUI shopDialogueTxt;
+    [SerializeField] private TextMeshProUGUI inShopTxt;
 
     bool hasFinishedTalking, isTalking, canTalk;
 
@@ -24,11 +25,13 @@ public class ShopManager : MonoBehaviour
     float timer;
 
     private string[] talkTexts = { "It’s not always easy to work here, y’know... Those folks aren't talkative, they just shoot their minerals on me and I’m supposed to give them the gear. What am I supposed to do? I’m a sturdy guy y’know, I can handle it but yeah it’s a pain in the *ss.",
-        "I mean you’re kind of a cool guy, you actually talked to me and it means I can finally express myself y’know. Oh by the way, yesterday I found something interesting in the mine as I was beating some rocks out. I found a teeny tiny insect that looked like it had a rough day. Like really rough, it was bleeding and all.",
-        "So I decided to take it with me and try to save its life y’know. I said to myself “That’s something I should do because it seems kinda cool”. So back home I put the thingy on the table to try to save him y’know? The thing is, I’M NOT A DOCTOR.",
-        "So I took the only thing that was in my fridge, Grug, and fed it with it. Don’t do that at home kids. By the way, where did those kids come from? Anyway, it worked, I think. It’s still alive so I think it worked. I called it “Molly” because the little thingy was carrying tiny bits of minerals on its back when I found it.",
-        "Maybe I’ll take it at work one day, ‘could be refreshing for it. Did you know that Grug could heal wounds? I know that’s crazy! Next you get hurt by whatever bad thing is injuring you, just grab some Grug and drink it like if you were dying, I mean it should be the cause so… Just drink it mate.",
-        "Anyway, you wanted to buy something? I’m here to sell you some goodies so please, do it. Do it?"
+        "I mean you’re kind of a cool guy, you actually talked to me and it means I can finally express myself y’know. I may be a truck, but I’m a green truck! Y’know green trucks are a special kind of truck.",
+        "They call us the “Motorized Grass”, or something like that… I still don’t know why they call us that, I mean I’m not made of grass and I run on gasoline so I’m not the eco friendly kind of guy. Always ready to beat some tar!",
+        "Anyway the thing is, I’m a talking truck that sells things to weird miners every day and I’m getting paid with minerals. Literal minerals! And I don’t even know what to do with those weird looking rocks! Also why do those trees look like that? What a freaking shame!",
+        "Oh I have to tell ya something. A hell of a story mate! So yesterday I was chilling on the road when suddenly I saw something on the ground. I immediately stopped, we never know what treasure we can find on the ground sometimes, y’know? But sadly it wasn’t a treasure, it was a freaking agonizing insect!",
+        "I couldn’t let it die here, so I took it with me. Back at the garage I gave him the only drinkable thing I had: Grug! And ya know what? It worked! The little thingy was back alive! I called him “Teeny tiny little thingy that was dying on the ground but revived after drinking some Grug”, cool name huh?",
+        "Yeah, I know! I take it with me everywhere I go now, it seems to like the road, like me! Anyway, that was the cool part, now I have to clean its little poops every minute or so… Can you even poop? Sorry, cringy question. I can, if you’re wondering. I won’t tell you how however.",
+        "Sorry, maybe you wanted to buy something? I can still sell ya the goodies if you want! Just ask me, I won't move! Just ask mate!\r\n",
     };
 
     void Start()
@@ -54,7 +57,7 @@ public class ShopManager : MonoBehaviour
             hasFinishedTalking = false;
             timer = 0;
             StopAllCoroutines();
-            StartCoroutine(TypeText(talkTexts[index]));
+            StartCoroutine(TypeText(talkTexts[index], shopDialogueTxt));
             index += 1;
             if(index == talkTexts.Length)
             {
@@ -71,16 +74,16 @@ public class ShopManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         StopAllCoroutines();
-        StartCoroutine(TypeText("Welcome my friend"));
+        StartCoroutine(TypeText("Welcome my friend", shopDialogueTxt));
     }
 
     public void EnterShop()
     {
         canTalk = false;
+        ShowShop();
         StopAllCoroutines();
         CancelInvoke();
-        StartCoroutine(TypeText("Here’s what I have for ya! Y’need some mining power? Look at this awesome shiny pickaxe! Tired of getting hit by a rock on your head? Get this sturdy helmet! If you’re just hungry then you can buy this pretty sandwich!"));
-        Invoke(nameof(ShowShop), 11f);
+        StartCoroutine(TypeText("Here’s what I have for ya! Y’need some mining power? Look at this awesome shiny pickaxe! Tired of getting hit by a rock on your head? Get this sturdy helmet! If you’re just hungry then you can buy this pretty sandwich!", inShopTxt));
     }
 
     public void HideShop()
@@ -88,7 +91,7 @@ public class ShopManager : MonoBehaviour
         shop.SetActive(false);
         PlayerMovement.instance.ShowHideCamera(false);
         StopAllCoroutines();
-        StartCoroutine(TypeText("Well, well, well... What else can I do for you?"));
+        StartCoroutine(TypeText("Well, well, well... What else can I do for you?", shopDialogueTxt));
     }
 
     private void ShowShop()
@@ -115,7 +118,7 @@ public class ShopManager : MonoBehaviour
         PlayerMovement.instance.SetIsInShop(false);
         CancelInvoke();
         StopAllCoroutines();
-        StartCoroutine(TypeText("Okay mate, see ya!"));
+        StartCoroutine(TypeText("Okay mate, see ya!", shopDialogueTxt));
         Invoke(nameof(HideShopDialogue), 2f);
     }
 
@@ -124,13 +127,13 @@ public class ShopManager : MonoBehaviour
         shopDialogue.SetActive(false);
     }
 
-    IEnumerator TypeText(string fullText)
+    IEnumerator TypeText(string fullText, TextMeshProUGUI textBox)
     {
         string typedText = "";
         foreach (char letter in fullText)
         {
             typedText += letter;
-            shopDialogueTxt.text = typedText;
+            textBox.text = typedText;
             yield return new WaitForSeconds(typeSpeed);
         }
         if (isTalking)
