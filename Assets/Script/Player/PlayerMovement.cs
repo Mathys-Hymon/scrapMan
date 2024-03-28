@@ -12,9 +12,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 input;
     private List<GameObject> scraps = new List<GameObject>();
     private Rigidbody rb;
-    private bool grounded, hasPickaxe = true, isMining;
+    private bool grounded, hasPickaxe = true, isMining, isInShop;
     private float height;
     private Vector3 cameraOffset;
+
+    [SerializeField] private GameObject pressE;
 
     private void Start()
     {
@@ -29,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         if (hasPickaxe)
         {
             transform.GetChild(1).GetChild(2).gameObject.SetActive(true);
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !isInShop)
             {
                 isMining = true;
                 float rotationValue = Mathf.PingPong(Time.time * 8f, 1.0f) * 120 - 35;
@@ -47,7 +49,12 @@ public class PlayerMovement : MonoBehaviour
             transform.GetChild(1).GetChild(2).gameObject.SetActive(false);
         }
 
-
+        if (pressE.activeSelf && Input.GetKeyDown(KeyCode.E))
+        {
+            isInShop = true;
+            ShopManager.instance.EnterShopDialogue();
+            pressE.SetActive(false);
+        }
 
 
         if (input.magnitude < 0.1f) return;
@@ -61,12 +68,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && !isInShop)
         {
             input.x = -1;
             rb.velocity -= new Vector3(MouseLook.instance.transform.right.x * playerAcceleration * Time.deltaTime, 0, MouseLook.instance.transform.right.z * playerAcceleration * Time.deltaTime);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && !isInShop)
         {
             input.x = 1;
             rb.velocity += new Vector3(MouseLook.instance.transform.right.x * playerAcceleration * Time.deltaTime, 0, MouseLook.instance.transform.right.z * playerAcceleration * Time.deltaTime);
@@ -76,12 +83,12 @@ public class PlayerMovement : MonoBehaviour
             input.x = 0;
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && !isInShop)
         {
             input.y = -1;
             rb.velocity -= new Vector3(MouseLook.instance.transform.forward.x * playerAcceleration * Time.deltaTime, 0, MouseLook.instance.transform.forward.z * playerAcceleration * Time.deltaTime);
         }
-        else if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W) && !isInShop)
         {
             input.y = 1;
             rb.velocity += new Vector3(MouseLook.instance.transform.forward.x * playerAcceleration * Time.deltaTime, 0, MouseLook.instance.transform.forward.z * playerAcceleration * Time.deltaTime);
@@ -90,9 +97,11 @@ public class PlayerMovement : MonoBehaviour
         {
             input.y = 0;
         }
-
-        rb.velocity += new Vector3(input.y * MouseLook.instance.transform.forward.x * playerAcceleration * Time.deltaTime, 0, input.y * MouseLook.instance.transform.forward.z * playerAcceleration * Time.deltaTime);
-        rb.velocity += new Vector3(input.x * MouseLook.instance.transform.right.x * playerAcceleration * Time.deltaTime, 0, input.x * MouseLook.instance.transform.right.z * playerAcceleration * Time.deltaTime);
+        if (!isInShop)
+        {
+            rb.velocity += new Vector3(input.y * MouseLook.instance.transform.forward.x * playerAcceleration * Time.deltaTime, 0, input.y * MouseLook.instance.transform.forward.z * playerAcceleration * Time.deltaTime);
+            rb.velocity += new Vector3(input.x * MouseLook.instance.transform.right.x * playerAcceleration * Time.deltaTime, 0, input.x * MouseLook.instance.transform.right.z * playerAcceleration * Time.deltaTime);
+        }
 
         if (input.magnitude == 0)
         {
@@ -127,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             scraps[i].transform.position = Vector3.Slerp(scraps[i].transform.localPosition, transform.GetChild(1).GetChild(0).transform.position + Vector3.up * i / 2, (100 / (i + 1)) * Time.deltaTime);
         }
 
-        if(cameraOffset.magnitude > 0)
+        if(cameraOffset.magnitude > 0 && !isInShop)
         {
             Camera.main.gameObject.transform.localPosition = Vector3.Slerp(Camera.main.gameObject.transform.localPosition, cameraOffset, 10 * Time.deltaTime);
         }
@@ -153,4 +162,32 @@ public class PlayerMovement : MonoBehaviour
     {
         return isMining;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Shop"))
+        {
+            pressE.SetActive(true);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Shop"))
+        {
+            pressE.SetActive(false);
+        }
+    }
+
+    public void SetIsInShop(bool active)
+    {
+        isInShop=active;
+    }
+
+    public void ShowHideCamera(bool active)
+    {
+        transform.GetChild(3).gameObject.SetActive(active);
+    }
+
+    public bool getIsInShop() { return isInShop; }
+
 }
