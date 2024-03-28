@@ -183,9 +183,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void ShowHideCamera(bool active)
     {
-        transform.GetChild(3).gameObject.SetActive(active);
+        transform.GetChild(2).gameObject.SetActive(active);
     }
 
     public bool getIsInShop() { return isInShop; }
+
+    public int GetMoney() { return scraps.Count; }
 
 }
