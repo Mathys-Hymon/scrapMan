@@ -14,7 +14,7 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI shopDialogueTxt;
 
-    bool hasFinishedTalking, isTalking;
+    bool hasFinishedTalking, isTalking, canTalk;
 
     int index = 0;
     float timer;
@@ -36,7 +36,7 @@ public class ShopManager : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        if (hasFinishedTalking && index < talkTexts.Length && timer > 1)
+        if (hasFinishedTalking && index < talkTexts.Length && timer > 1 && canTalk)
         {
             hasFinishedTalking = false;
             timer = 0;
@@ -52,6 +52,8 @@ public class ShopManager : MonoBehaviour
 
     public void EnterShopDialogue()
     {
+        canTalk = false;
+        shopDialogue.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         StopAllCoroutines();
@@ -60,6 +62,7 @@ public class ShopManager : MonoBehaviour
 
     public void EnterShop()
     {
+        canTalk = false;
         StopAllCoroutines();
         StartCoroutine(TypeText("Très bien, voici ce que j'ai à te proposer."));
         Invoke(nameof(ShowShop), 3f);
@@ -81,6 +84,7 @@ public class ShopManager : MonoBehaviour
     {
         hasFinishedTalking = true;
         isTalking = true;
+        canTalk = true;
         timer = 1;
         index = 0;
     }
@@ -89,9 +93,10 @@ public class ShopManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        canTalk = false;
         StopAllCoroutines();
         StartCoroutine(TypeText("Goodbye my friend"));
-        Invoke(nameof(HideShopDialogue), 3f);
+        Invoke(nameof(HideShopDialogue), 2f);
     }
 
     private void HideShopDialogue()

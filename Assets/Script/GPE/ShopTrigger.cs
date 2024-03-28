@@ -5,16 +5,30 @@ using UnityEngine;
 public class ShopTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject pressE;
-    private void OnTriggerStay(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Shop"))
         {
             pressE.SetActive(true);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Shop"))
+        {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                ShopManager.instance.EnterShop();
+                ShopManager.instance.EnterShopDialogue();
                 pressE.SetActive(false);
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Shop"))
+        {
+            pressE.SetActive(false);
         }
     }
 }
