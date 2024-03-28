@@ -227,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
 
     public int GetMoney() { return scraps.Count; }
 
-    public void ShowItem(int index)
+    public void ShowItem(int index, int cost)
     {
         switch (index)
         {
@@ -241,6 +241,12 @@ public class PlayerMovement : MonoBehaviour
             case 2:
                 transform.GetChild(1).GetChild(4).gameObject.SetActive(true);
                 break;
+        }
+
+        for (int i = 0; i < cost; i++)
+        {
+            Destroy(scraps[i].gameObject);
+            scraps.RemoveAt(i);
         }
     }
 

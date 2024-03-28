@@ -20,8 +20,8 @@ public class MouseLook : MonoBehaviour
     {
         if (!PlayerMovement.instance.getIsInShop())
         {
-            input.y += Input.GetAxisRaw("Mouse X") * Time.deltaTime * mouseSensitivity * 100;
-            input.x += -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * mouseSensitivity * 100;
+            input.y += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
+            input.x += -Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
 
             input.x = Mathf.Clamp(input.x, 0, offset);
 

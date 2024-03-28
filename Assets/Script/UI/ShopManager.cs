@@ -8,6 +8,7 @@ public class ShopManager : MonoBehaviour
     public static ShopManager instance;
 
     [SerializeField] private float typeSpeed = 0.05f;
+    [SerializeField] private GameObject distanceGO;
 
     private GameObject shopDialogue;
     private GameObject shop;
@@ -38,6 +39,8 @@ public class ShopManager : MonoBehaviour
     }
     private void Update()
     {
+        DistanceFromPlayer();
+
         if (Input.GetKeyDown(KeyCode.Escape) && shop.activeSelf)
         {
             HideShop();
@@ -57,6 +60,7 @@ public class ShopManager : MonoBehaviour
             {
                 isTalking = false;
             }
+            
         }
     }
 
@@ -143,8 +147,16 @@ public class ShopManager : MonoBehaviour
             btn.enabled = false;
             var buttoncolor = btn.colors;
             buttoncolor.disabledColor = Color.red;
-            PlayerMovement.instance.ShowItem(index);
+            PlayerMovement.instance.ShowItem(index, itemCost[index]);
         }
-        
+    }
+
+    public void DistanceFromPlayer()
+    {
+        float Distance = Vector3.Distance(distanceGO.transform.position, PlayerMovement.instance.transform.position);
+
+        distanceGO.transform.LookAt(PlayerMovement.instance.transform.position);
+        distanceGO.transform.localScale = new Vector3(0.05f * Distance/20, 0.05f * Distance / 20, 0.05f * Distance / 20);
+        distanceGO.transform.GetChild(1).GetComponent<TextMeshProUGUI>().SetText(((int)Distance).ToString() + "m");
     }
 }
